@@ -30,7 +30,6 @@ class TodoListModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<List<Todo>> _genMockTodos() async {
     await Future.delayed(const Duration(seconds: 2));
     return Future(() => List.generate(20, (index) {
