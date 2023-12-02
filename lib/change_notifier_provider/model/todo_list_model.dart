@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-enum TodoStatus { pendingExecuted, partExecuted, computed }
+enum TodoStatus { all, computed }
 
 class Todo {
   int id;
@@ -17,7 +17,10 @@ class Todo {
 class TodoListModel extends ChangeNotifier {
   List<Todo> _todos = [];
 
-  List<Todo> get todos => _todos;
+  List<Todo> get allTodos => _todos;
+
+  List<Todo> get computedTodos =>
+      _todos.where((ele) => ele.status == TodoStatus.computed).toList();
 
   void loadingTodos() async {
     _todos = await _genMockTodos();
@@ -26,17 +29,19 @@ class TodoListModel extends ChangeNotifier {
 
   void deleteTodo(int id) {
     _todos.removeWhere((todo) => todo.id == id);
-    _todos = _todos.toList(); // 注意这里，因为使用Selector 需要 rebuilder，所以需要重新赋值，以更新widget
+    _todos =
+        _todos.toList(); // 注意这里，因为使用Selector 需要 rebuilder，所以需要重新赋值，以更新widget
     notifyListeners();
   }
 
   Future<List<Todo>> _genMockTodos() async {
     await Future.delayed(const Duration(seconds: 2));
     return Future(() => List.generate(20, (index) {
+          var type = index % 2 == 0 ? "ALL type" : "Computed type";
           return Todo(
             id: index,
-            title: "title is num $index",
-            status: TodoStatus.pendingExecuted,
+            title: "$type title is num $index",
+            status: index % 2 == 0 ? TodoStatus.all : TodoStatus.computed,
           );
         }));
   }
