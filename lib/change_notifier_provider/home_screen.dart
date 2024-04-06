@@ -27,19 +27,27 @@ class _HomePageForProvider extends State<HomePageForProvider> {
       bottomNavigationBar: ValueListenableBuilder<TodoStatus>(
         valueListenable: _tab,
         builder: (context, todoStatus, child) {
-          return BottomNavigationBar(
-            currentIndex: TodoStatus.values.indexOf(todoStatus),
-            onTap: (index) => _tab.value = TodoStatus.values[index],
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.list),
-                label: "全部",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.access_alarm),
-                label: "已完成",
-              )
-            ],
+          return Theme(
+            data: ThemeData(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+            ),
+            child: BottomNavigationBar(
+              currentIndex: TodoStatus.values.indexOf(todoStatus),
+              onTap: (index) => _tab.value = TodoStatus.values[index],
+              unselectedFontSize: 14,
+              useLegacyColorScheme: false,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.list),
+                  label: "全部",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.access_alarm),
+                  label: "已完成",
+                )
+              ],
+            ),
           );
         },
       ),

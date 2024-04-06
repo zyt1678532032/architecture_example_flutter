@@ -36,13 +36,15 @@ class TodoListModel extends ChangeNotifier {
 
   Future<List<Todo>> _genMockTodos() async {
     await Future.delayed(const Duration(seconds: 2));
-    return Future(() => List.generate(20, (index) {
-          var type = index % 2 == 0 ? "ALL type" : "Computed type";
-          return Todo(
-            id: index,
-            title: "$type title is num $index",
-            status: index % 2 == 0 ? TodoStatus.all : TodoStatus.computed,
-          );
-        }));
+    return Future(
+      () => List.generate(20, (index) {
+        var type = index % 2 == 0 ? "ALL type" : "Computed type";
+        return Todo(
+          id: index,
+          title: "$type title is num $index",
+          status: index % 2 == 0 ? TodoStatus.all : TodoStatus.computed,
+        );
+      }),
+    );
   }
 }
