@@ -34,7 +34,7 @@ class _AllTodosPageState extends State<AllTodosPage>
         return ListView.builder(
           key: const Key('__todoList__'),
           shrinkWrap: true,
-          itemCount: todos.length,
+          itemCount: 1,
           itemBuilder: (context, index) {
             return Dismissible(
               key: ValueKey(todos[index]),
@@ -117,6 +117,9 @@ class _AllTodosPageState extends State<AllTodosPage>
                   // RectAnimationWidget(
                   //   listenable: isShow,
                   // ),
+                  ChangeContainerColor(
+                    isChangeColor: ValueNotifier(false),
+                  )
                 ],
               ),
               onDismissed: (_) {
@@ -181,6 +184,34 @@ class ComputedTodosPage extends StatelessWidget {
               },
             );
           },
+        );
+      },
+    );
+  }
+}
+
+class ChangeContainerColor extends StatelessWidget {
+  final ValueNotifier<bool> isChangeColor;
+
+  const ChangeContainerColor({
+    super.key,
+    required this.isChangeColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    print('ChangeContainerColor build');
+    return ValueListenableBuilder(
+      valueListenable: isChangeColor,
+      builder: (context, isChange, child) {
+        print('ChangeContainerColor ValueListenableBuilder builder');
+        return GestureDetector(
+          onTap: () => isChangeColor.value = !isChangeColor.value,
+          child: Container(
+            width: 100,
+            height: 100,
+            color: isChange ? Colors.red : Colors.green,
+          ),
         );
       },
     );
