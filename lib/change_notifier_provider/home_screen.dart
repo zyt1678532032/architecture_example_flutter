@@ -1,3 +1,4 @@
+import 'package:architecture_example_flutter/change_notifier_provider/widget/custom_tween_animation.dart';
 import 'package:architecture_example_flutter/change_notifier_provider/widget/todos_page.dart';
 import 'package:flutter/material.dart';
 import 'model/todo_list_model.dart';
@@ -54,11 +55,23 @@ class _HomePageForProvider extends State<HomePageForProvider> {
       body: ValueListenableBuilder<TodoStatus>(
         valueListenable: _tab,
         builder: (context, todoStatus, child) {
-          if (todoStatus == TodoStatus.all) {
-            return const AllTodosPage();
-          } else {
-            return const ComputedTodosPage();
-          }
+          return Column(
+            children: [
+              CustomTweenAnimation(
+                onlyScale: false,
+                onEnd: (child) {
+                  Transform.translate(
+                    offset: const Offset(0, 0),
+                    child: child,
+                  );
+                },
+                child: Container(
+                  color: Colors.green,
+                  height: 100,
+                ),
+              ),
+            ],
+          );
         },
       ),
     );
