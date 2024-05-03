@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:architecture_example_flutter/change_notifier_provider/widget/custom_tween_animation.dart';
 import 'package:architecture_example_flutter/change_notifier_provider/widget/todos_page.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,8 @@ class HomePageForProvider extends StatefulWidget {
 
 class _HomePageForProvider extends State<HomePageForProvider> {
   final _tab = ValueNotifier<TodoStatus>(TodoStatus.all);
+
+  bool isChangeTextStyle = true;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +61,30 @@ class _HomePageForProvider extends State<HomePageForProvider> {
         builder: (context, todoStatus, child) {
           return Column(
             children: [
+              AnimatedDefaultTextStyle(
+                style: isChangeTextStyle
+                    ? const TextStyle(
+                        fontSize: 16,
+                        color: Colors.red,
+                        fontWeight: FontWeight.normal,
+                      )
+                    : const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.fastOutSlowIn,
+                child: const Text('AnimatedDefaultTextStyle'),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    isChangeTextStyle = !isChangeTextStyle;
+                  });
+                },
+                child: const Text('改变TextStyle'),
+              ),
               CustomTweenAnimation(
                 onlyScale: false,
                 onEnd: (child) {
@@ -65,9 +93,20 @@ class _HomePageForProvider extends State<HomePageForProvider> {
                     child: child,
                   );
                 },
-                child: Container(
-                  color: Colors.green,
-                  height: 100,
+                child: TweenAnimationBuilder(
+                  tween: Tween<double>(begin: 1, end: 0),
+                  duration: const Duration(milliseconds: 600),
+                  curve: Curves.fastOutSlowIn,
+                  builder: (BuildContext context, double value, Widget? child) {
+                    return Transform.scale(
+                      scaleY: value,
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        color: Colors.green,
+                        height: 100,
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
