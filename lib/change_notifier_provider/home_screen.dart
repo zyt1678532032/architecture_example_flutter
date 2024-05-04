@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:architecture_example_flutter/change_notifier_provider/widget/custom_tween_animation.dart';
 import 'package:architecture_example_flutter/change_notifier_provider/widget/todos_page.dart';
 import 'package:flutter/material.dart';
+import 'animation/animation_page.dart';
 import 'model/todo_list_model.dart';
 
 /// Provider + ChangeNotifier 业务结构
@@ -93,20 +94,19 @@ class _HomePageForProvider extends State<HomePageForProvider> {
                     child: child,
                   );
                 },
-                child: TweenAnimationBuilder(
-                  tween: Tween<double>(begin: 1, end: 0),
-                  duration: const Duration(milliseconds: 600),
-                  curve: Curves.fastOutSlowIn,
-                  builder: (BuildContext context, double value, Widget? child) {
-                    return Transform.scale(
-                      scaleY: value,
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        color: Colors.green,
-                        height: 100,
-                      ),
-                    );
-                  },
+                child: Column(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const AnimationPage(),
+                          ),
+                        );
+                      },
+                      child: Text('ColorTween'),
+                    )
+                  ],
                 ),
               ),
             ],
