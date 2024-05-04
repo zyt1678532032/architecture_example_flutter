@@ -90,6 +90,12 @@ class _TranslationTweenWidgetState extends State<TranslationTweenWidget>
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SlideTransition(
       position: _offsetAnimation,
@@ -128,6 +134,12 @@ class _FadeTransitionWidgetState extends State<FadeTransitionWidget>
       parent: _controller,
       curve: Curves.fastOutSlowIn,
     ));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
