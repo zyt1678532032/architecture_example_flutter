@@ -91,8 +91,8 @@ class _TranslationTweenWidgetState extends State<TranslationTweenWidget>
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -138,8 +138,8 @@ class _FadeTransitionWidgetState extends State<FadeTransitionWidget>
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
