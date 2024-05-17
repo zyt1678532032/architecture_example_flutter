@@ -1,10 +1,9 @@
-import 'dart:ffi';
-
 import 'package:architecture_example_flutter/change_notifier_provider/widget/custom_tween_animation.dart';
-import 'package:architecture_example_flutter/change_notifier_provider/widget/todos_page.dart';
 import 'package:flutter/material.dart';
+
 import 'animation/animation_page.dart';
 import 'model/todo_list_model.dart';
+import 'state_lifecycyle_page.dart';
 
 /// Provider + ChangeNotifier 业务结构
 class HomePageForProvider extends StatefulWidget {
@@ -104,11 +103,21 @@ class _HomePageForProvider extends State<HomePageForProvider> {
                           ),
                         );
                       },
-                      child: Text('ColorTween'),
+                      child: const Text('ColorTween'),
                     )
                   ],
                 ),
               ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const StateLifecyclePage(),
+                    ),
+                  );
+                },
+                child: const Text('StatefulWidget lifecycle'),
+              )
             ],
           );
         },
