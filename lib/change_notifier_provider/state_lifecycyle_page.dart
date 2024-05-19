@@ -86,36 +86,36 @@ class _StateWidgetOne extends State<StateWidget> {
   @override
   void initState() {
     super.initState();
-    debugPrint('State ===> StateWidget initState');
+    debugPrint('State ===> ${widget.title} initState');
   }
 
   @override
   void deactivate() {
     super.deactivate();
-    debugPrint('State ===> StateWidget deactivate');
+    debugPrint('State ===> ${widget.title} deactivate');
   }
 
   @override
   void dispose() {
     super.dispose();
-    debugPrint('State ===> StateWidget dispose');
+    debugPrint('State ===> ${widget.title} dispose');
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    debugPrint('State ===> StateWidget didChangeDependencies');
+    debugPrint('State ===> ${widget.title} didChangeDependencies');
   }
 
   @override
   void didUpdateWidget(covariant StateWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    debugPrint('State ===> StateWidget didUpdateWidget');
+    debugPrint('State ===> ${widget.title} didUpdateWidget');
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('State ===> StateWidget build');
+    debugPrint('State ===> ${widget.title} build');
     return GestureDetector(
       onTap: () {
         setState(() {});
